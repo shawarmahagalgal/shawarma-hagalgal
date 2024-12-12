@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הזמנת שווארמה</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .send-button {
+            background-color: #2e65db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .send-button:hover {
+            background-color: #1a489e;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        #closed-page {
+            text-align: center;
+        }
+        .order-review {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        .order-review h3 {
+            margin-top: 0;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        .order-item span {
+            font-size: 16px;
+        }
+        .order-item button {
+            background-color: red;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100px; /* Fixed width */
+            text-align: center;
+        }
+        .order-item button:hover {
+            background-color: darkred;
+        }
+        input[readonly] {
+            background-color: #f0f0f0;
+        }
+
+        .order-container {
+            position: relative; /* Needed for the button's absolute positioning */
+            display: flex;
+            align-items: flex-start; /* Align items to the top of the container */
+            min-height: 100px; /* Sets a consistent height for all orders */
+        }
+
+        .order-content {
+            display: flex;
+            gap: 10px; /* Space between the text and button */
+            width: 100%;
+            align-items: flex-start; /* Align content to the top */
+            position: relative;
+        }
+
+        .order-text {
+            flex-grow: 1; /* Makes the text span fill available space */
+            max-width: calc(100% - 100px); /* Ensures text doesn’t overlap the button */
+            word-wrap: break-word; /* Ensures text breaks onto the next line if necessary */
+        }
+        .order-button {
+            position: absolute; /* Fixes the button's position */
+            left: 0; /* Aligns the button to the right edge */
+            top: 10px; /* Adjust this value to control the vertical placement */
+            width: 80px; /* Ensures uniform button width */
+            height: 40px; /* Ensures uniform button height */
+            text-align: center;
+            padding: 5px;
+            box-sizing: border-box; /* Ensures padding doesn’t affect size */
+            background-color: rgb(204, 29, 29); /* Sets the button color to red */
+            color: white; /* Ensures text is readable on a red background */
+        }
+        #order-page {
+            position: relative;
+            padding-top: 50px; /* Adds space at the top so the logo doesn’t overlap the text */
+        }
+
+        #preview-page {
+            position: relative;
+            padding-top: 50px; /* Adds space at the top so the logo doesn’t overlap the text */
+        }
+
+        #logo {
+            position: absolute;
+            top: 10px;  /* Adjust as necessary to place the logo vertically */
+            left: 10px; /* Adjust as necessary to place the logo horizontally */
+            width: 100px; /* Adjust the size of the logo */
+            height: auto;
+        }
+
+       /* Hide the default checkbox */
+        .checkbox-btn input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Style the labels to look like buttons */
+        .checkbox-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Change background color of the entire label when the checkbox is checked */
+        .checkbox-btn input[type="checkbox"]:checked + span {
+            color: rgb(12, 182, 6);               /* White text */
+        }
+
+
+        /* Add a hover effect to the label */
+        .checkbox-btn:hover {
+            background-color: #ddd;
+        }
+
+         /* Hide the default checkbox */
+        .checkbox-btn2 input[type="checkbox"] {
+            display: none;
+        }
+        /* Style the labels to look like buttons */
+        .checkbox-btn2 {
+            display: block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Change background color of the entire label when the checkbox is checked */
+        .checkbox-btn2 input[type="checkbox"]:checked + span {
+            color: rgb(8, 39, 216);               /* White text */
+        }
+
+       /* Hide the default radio button */
+        .radio-btn input[type="radio"] {
+            display: none;
+        }
+
+        /* Base style for labels */
+        .radio-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Change label style when the associated radio button is checked */
+        .radio-btn input[type="radio"]:checked + span {
+            color: rgb(8, 39, 216);                   /* White text */
+        }
+
+        /* Hover effect for the label */
+        .radio-btn:hover {
+            background-color: #ddd;
+        }
+
+          .background-container {
+            position: relative;
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            font-size: 2rem;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevents pseudo-element overflow */
+        }
+
+        .background-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('logo.jpg'); /* Replace with your image link */
+            background-size: contain; /* Ensure the image covers the screen */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents tiling */
+            opacity: 0.4; /* Transparency level */
+            z-index: -1; /* Ensures the background stays behind the text */
+        }
+        .background-container span {
+            z-index: 1;
+        }
+
+        /* Optional: Add more distinct hover style for checked state */
+        .checkbox-btn input[type="checkbox"]:checked:hover {
+            background-color: #45a049;  /* Slightly darker green on hover */
+        }
+
+        h2 {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        #logo {
+            position: absolute;
+            top: 10px; /* Adjust spacing from the top */
+            left: 10px; /* Adjust spacing from the left */
+            max-width: 80px; /* Set a maximum width for the logo */
+            z-index: 10; /* Ensure it stays on top of other elements */
+        }
+
+        /* Prevent overlap with other content */
+        #orderForm {
+            margin-top: 100px; /* Push content below the logo */
+            position: relative; /* Ensure it respects the logo's absolute position */
+        }
+
+        /* Additional styling for responsiveness */
+        @media (max-width: 600px) {
+            #logo {
+                max-width: 80px; /* Adjust logo size for smaller screens */
+            }
+            #orderForm {
+                margin-top: 100px; /* Adjust margin for smaller screens */
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="order-page" class="container" style="display: none;">
+        <img src="logo.jpg" alt="Logo" id="logo"/>
+
+        <form id="orderForm">
+            <h2>ברוכים הבאים לגלגל!</h2>
+
+            <input type="text" id="name" name="name" placeholder="שם" maxlength="25" required dir="rtl">
+
+            <label></label>
+            <input type="tel" id="phone" name="phone" placeholder="מספר נייד" maxlength="10" required dir="rtl">
+            <label></label>
+
+            <label>
+                <input type="checkbox" id="shipping" value="משלוח" data-price="5"> משלוח (₪5)
+                <input type="text" id="addressTextBox" name="addressTextBox" placeholder="כתובת למשלוח" maxlength="30" required readonly>
+    
+            </label>
+
+            <p><strong>איך תשלמו?</strong></p>
+
+            <div id="paymentMethod" class="radio-group">
+                <label class="radio-btn">
+                    <input type="radio" name="paymentOption" value="מזומן"> <span>מזומן</span>
+                </label>
+                <label class="radio-btn">
+                    <input type="radio" name="paymentOption" value="Bit"> <span>Bit</span>
+                </label>
+                <label class="radio-btn">
+                    <input type="radio" name="paymentOption" value="Paybox"> <span>Paybox</span>
+                </label>
+            </div>
+
+
+            <p><strong>מה תרצו להזמין?</strong></p>
+
+            <label class="checkbox-btn2">
+                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma" data-price="35"><span> שווארמה בפיתה (35₪)</span>
+            </label>
+
+
+            <div id="orderOptions" class="checkbox-group" style="display: none;">
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="חומוס"> <span>חומוס</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="חריף"> <span>חריף</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="מלפפון"> <span>מלפפון</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="עגבנייה"> <span>עגבנייה</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="כרוב לבן"> <span>כרוב לבן</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="כרוב סגול"> <span>כרוב סגול</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="בצל עם סומק"> <span>בצל עם סומק</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="מלפפון חמוץ"> <span>מלפפון חמוץ</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="פטרוזיליה"> <span>פטרוזיליה</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="טחינה"> <span>טחינה</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="עמבה"> <span>עמבה</span>
+                </label>
+            </div>
+            
+            
+
+            <label class="checkbox-btn2">
+                <input type="checkbox" id="friesCheckBox" name="fries" value="צ'יפס" data-price="10"><span> צ'יפס (10₪)</span>
+            </label>
+            <label class="checkbox-btn2">
+                <input type="checkbox" id="cokeCheckBox" name="coke" value="קולה" data-price="5"><span> פחית קולה (5₪)</span>
+            </label>
+            <label class="checkbox-btn2">
+                <input type="checkbox" id="zeroCheckBox" name="zero" value="זירו" data-price="5"><span> פחית זירו (5₪)</span>
+            </label>
+
+            <label></label>
+            <input type="text" id="dishComments" name="dishComments" placeholder="הערות/שם לזיהוי מנה" maxlength="25" required dir="rtl">
+            <label></label>
+
+            <p><strong> מחיר מנה:</strong> <span id="price">0</span></p>
+
+            <button id="addOrderBtn" type="button">הוסף להזמנה</button>
+        </form>
+
+        <div id="orderReviewSection" class="order-review" style="display: none;">
+            <h3>סיכום הזמנה</h3>
+            <div id="orderReviewList"></div>
+            <p><strong>משלוח:</strong> <span id="shippingFee">0</span></p>
+            <p><strong>מחיר כולל:</strong> <span id="overallPrice">0</span></p>
+            <button id="sendOrderBtn" type="button" class="send-button">שלח הזמנות</button>
+        </div>
+    </div>
+
+    <div id="preview-page" class="container" style="display: none;">
+        <img src="logo.jpg" alt="Logo" id="logo"/>
+        <form>
+            <h2>ההזמנה נשלחה!</h2>
+            <p><strong>שם:</strong> <span id="namePreview"></span></p>
+            <p><strong>נייד:</strong> <span id="phonePreview"></span></p>
+            <p><strong></strong> <span id="shippingAddressPreview"></span></p>
+            <div id="previewOrders"></div>
+
+            <p><strong>שיטת תשלום:</strong> <span id="paymentMethodPreview"></span></p>
+
+            <p><strong>משלוח:</strong> <span id="shippingFeePreview">0</span></p>
+            <p><strong>סכום כולל:</strong> ₪<span id="previewTotal"></span></p>
+            <button id="newOrderBtn" type="button">הזמנה חדשה</button>
+        </form>
+    </div>
+    
+    <div class="background-container" id="closed-page" style="display: none;">
+        <h2>הדוכן סגור</h2>
+        <h3>שעות פתיחה: ימי ראשון, 17:00-21:30</h3>
+        <h3>(או עד סוף הגלגל)</h3>
+    </div>
+
+    <script type="module">
+
+        document.addEventListener('DOMContentLoaded', loadOrdersPage);
+
+        document.getElementById('shipping').addEventListener('change', function() {
+            const textbox = document.getElementById('addressTextBox');
+            if (this.checked) {
+                textbox.removeAttribute('readonly'); // Make the text box writable
+            } else {
+                textbox.setAttribute('readonly', true); // Make the text box readonly
+            }
+        });
+
+        const orderOptions = document.getElementById('orderOptions');
+        document.getElementById('ShawarmaCheckBox').addEventListener('change', function () {
+            if (this.checked) {
+                orderOptions.style.display = 'block'; // Show the group
+            } else {
+                orderOptions.style.display = 'none'; // Hide the group
+            }
+        });
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getDatabase, push, ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDloIOJSWp_5lVtoNBIE5XrdTJgbCpNGjo",
+            authDomain: "test-655b0.firebaseapp.com",
+            databaseURL: "https://test-655b0-default-rtdb.firebaseio.com",
+            projectId: "test-655b0",
+            storageBucket: "test-655b0.firebasestorage.app",
+            messagingSenderId: "948260428804",
+            appId: "1:948260428804:web:78f1ea2db14800c5b42951"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+
+        const shippingCheckbox = document.getElementById("shipping");
+
+        let orders = [];
+
+
+        function updateShippingFee(){
+            let overallPrice = parseInt(document.getElementById('overallPrice').textContent ,10)
+            let shippingFee = parseInt(shippingCheckbox.dataset.price, 10);
+            if(shippingCheckbox.checked){
+                document.getElementById('shippingFee').textContent = shippingCheckbox.dataset.price;
+                overallPrice += shippingFee;
+            }
+            else{
+                document.getElementById('shippingFee').textContent = 0;
+                overallPrice -= shippingFee;
+            }
+            document.getElementById('overallPrice').textContent = overallPrice;
+        }
+
+        // Load the order page, check if the shop is open or closed
+        function loadOrdersPage() {
+            const configRef = ref(db, "config/");
+            get(configRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const config = snapshot.val();
+                    const isShopOpen = config.is_shop_open;
+
+                    if (isShopOpen) {
+                        document.getElementById("order-page").style.display = "block";
+                        document.getElementById("closed-page").style.display = "none";
+                    } else {
+                        document.getElementById("order-page").style.display = "none";
+                        document.getElementById("closed-page").style.display = "block";
+                    }
+                }
+            }).catch((error) => {
+                console.error("Error loading shop status:", error);
+            });
+        }
+
+
+        const addOrderBtn = document.querySelector("#addOrderBtn");
+        const sendOrderBtn = document.querySelector("#sendOrderBtn");
+
+        addOrderBtn.addEventListener('click', addOrder);
+        sendOrderBtn.addEventListener('click', sendOrders);
+        shippingCheckbox.addEventListener('click', updateShippingFee);
+
+
+        const checkboxes = document.querySelectorAll('input[name="Shawarma"], input[name="fries"], input[name="coke"], input[name="zero"]');
+        checkboxes.forEach(checkbox => checkbox.addEventListener('change', updatePrice));
+
+        function updatePrice() {
+            const selectedOptions = Array.from(document.querySelectorAll('input[name="Shawarma"]:checked, input[name="fries"]:checked, input[name="coke"]:checked, input[name="zero"]:checked'));
+            var price = selectedOptions.reduce((total, option) => {
+                return total + parseInt(option.dataset.price, 10);
+            }, 0);
+
+            document.getElementById('price').textContent = price;
+        }
+
+        function updateOrderReview() {
+            const orderReviewList = document.getElementById("orderReviewList");
+            orderReviewList.innerHTML = '';
+            let overallPrice = 0;
+            let orderNumber = 1;
+            orders.forEach((order, index) => {
+                overallPrice += buildOrderView(order, orderReviewList, orderNumber,  true, index);
+                orderNumber++;
+            });
+            if(shippingCheckbox.checked){
+                overallPrice += parseInt(shippingCheckbox.dataset.price, 10);
+            }
+            document.getElementById('overallPrice').textContent = overallPrice;
+        }
+
+        function removeOrder(index) {
+            orders.splice(index, 1);
+            updateOrderReview();
+        }
+
+        var ShawarmaCheckBox = document.getElementById('ShawarmaCheckBox')
+        var friesCheckBox = document.getElementById('friesCheckBox')
+        var cokeCheckBox = document.getElementById('cokeCheckBox')
+        var zeroCheckBox = document.getElementById('zeroCheckBox')
+
+        
+        function addOrder() {
+            var options = Array.from(document.querySelectorAll('input[name="options"]:checked')).map(option => option.value);
+            const price = parseInt(document.getElementById('price').textContent, 10);
+            const additions = friesCheckBox.checked ? friesCheckBox.value : "";
+            const coke = cokeCheckBox.checked ? cokeCheckBox.value : "";
+            const zero = zeroCheckBox.checked ? zeroCheckBox.value : "";
+            const address = "";
+            const name = "";
+            const phone = "";
+            const paymentMethod = "";
+            var dishCommentsTmp = document.getElementById('dishComments').value;
+            const dishComments = dishCommentsTmp ? dishCommentsTmp : "";
+            const drinks = [cokeCheckBox.checked ? cokeCheckBox.value : "", zeroCheckBox.checked ? zeroCheckBox.value : ""]
+                .filter(Boolean)
+                .join(",");
+
+            if (!ShawarmaCheckBox.checked && !friesCheckBox.checked && !cokeCheckBox.checked && !zeroCheckBox.checked) {
+                alert("לא נבחרה מנה");
+                return;
+            }
+
+            if (ShawarmaCheckBox.checked && !options.length) {
+                var userResponse = confirm("לא נבחרו תוספות לשווארמה. תרצו רק פיתה עם בשר? (זה בסדר, אנחנו לא שופטים :) )");
+                if(!userResponse){
+                    return;
+                }
+                options = ["פיתה עם בשר, אנשים מוזרים... (סליחה ששפטנו)"];
+            }
+
+            if(!ShawarmaCheckBox.checked){
+                options = [""];
+            }
+
+            const order = {name, phone , options, additions, drinks, address, dishComments, price, paymentMethod };
+
+            orders.push(order);
+            updateOrderReview();
+
+            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox, #friesCheckBox , #cokeCheckBox ,#zeroCheckBox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false; // Uncheck each checkbox
+            });
+            document.getElementById('dishComments').value = "";
+            document.getElementById('price').textContent = "0"; // Reset total price
+            document.getElementById('orderOptions').style.display = 'none';
+            document.getElementById("orderReviewSection").style.display = 'block'; // Show review section
+        }
+
+        function addConstantFieldsToOrders(){
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const paymentMethod = document.querySelector('input[name="paymentOption"]:checked')?.value;
+
+            // Log the method (or handle the case where no button is selected)
+            if (!paymentMethod) {
+                alert("יש לבחור שיטת תשלום");
+                return false;
+            } 
+
+            var address = "";
+            if (!name || !phone) {
+                    alert("יש למלא שם ומספר טלפון");
+                    return false;
+            }
+
+            if(phone.length != 10){
+                alert("מספר נייד שגוי. נא להכניס מספר בן 10 ספרות");
+                return false;
+            }
+            if(shippingCheckbox.checked){
+                address = document.getElementById('addressTextBox').value;
+                if(address.length == 0){
+                    alert("בחרת משלוח, נא למלא כתובת");
+                    return false;
+                }
+
+            }
+            orders.forEach((order, index) => {
+                order.address = address;
+                order.name = name;
+                order.phone = phone;
+                order.paymentMethod = paymentMethod;
+            });
+
+            return true;
+        }
+
+        function buildOrderView(order, parentElement,orderNumber, addRemoveButton, indexToRemove){
+            const orderDiv = document.createElement('div');
+            const orderDetails = [];
+            // Add the dish number
+            if(orderNumber){
+                orderDetails.push(`מנה ${orderNumber}:`);
+            }
+
+            // Add options with prefix if not empty
+            if (order.options && order.options.length > 0 && order.options[0].trim() !== '') {
+                orderDetails.push(`שווארמה בפיתה עם: ${order.options.join(', ')}`);
+            }
+
+            // Add additions if not empty
+            if (order.additions && order.additions.trim() !== '') {
+                orderDetails.push(order.additions);
+            }
+
+            // Add drinks if not empty
+            if (order.drinks && order.drinks.trim() !== '') {
+                orderDetails.push(order.drinks);
+            }
+
+            if (order.dishComments && order.dishComments.trim() !== '') {
+                orderDetails.push(`הערות: (${order.dishComments})`);
+            }
+
+            // Add price if valid
+            if (order.price && !isNaN(order.price)) {
+                orderDetails.push(`<strong>מחיר: ₪${order.price}</strong>`);
+            }
+
+            if(addRemoveButton){
+                // Create and add a button to the order
+                orderDiv.innerHTML = `<div class="order-content">
+                                      <span class="order-text">
+                                      ${orderDetails.join('<br>')}
+                                      </span>
+                                      <button class="order-button" data-index="${indexToRemove}">הסר</button>
+                                                          </div>`;
+                orderDiv.querySelector('button').addEventListener('click', function() {
+                    removeOrder(indexToRemove);
+                });
+            }
+            else{
+                orderDiv.innerHTML = `<span class="order-text">
+                                    ${orderDetails.join('<br>')}
+                                </span>`;
+            }
+
+            parentElement.appendChild(orderDiv);
+
+            // Add a blank line between orders
+            const spacerDiv = document.createElement('div');
+            spacerDiv.style.height = '10px'; // Adjust the height as needed
+            parentElement.appendChild(spacerDiv);
+
+            // Update total amount if price is valid
+            if (!isNaN(order.price)) {
+                return order.price;
+            }
+
+            return 0;
+        }
+
+
+        function sendOrders() {
+
+            if (orders.length === 0) {
+                alert("אין הזמנות לשליחה");
+                return;
+            }
+
+            if(!addConstantFieldsToOrders()){
+                return;
+            }
+
+            var userResponse = confirm("הזדמנות אחרונה לעבור על ההזמנה :) להמשיך?");
+
+            if(!userResponse){
+                return;
+            }
+
+            orders.forEach(order => {
+                push(ref(db, "Orders/"), order).catch((error) => {
+                    console.error("Error sending order:", error);
+                });
+            });
+
+            // Display the preview page with orders
+            const previewOrders = document.getElementById('previewOrders');
+            previewOrders.innerHTML = '';
+            let totalAmount = 0;
+
+            let dishNumber = 1; // Initialize the dish number
+
+            orders.forEach(order => {
+                totalAmount += buildOrderView(order,previewOrders, dishNumber);
+                dishNumber++; // Increment the dish number
+       
+            });
+            let shipping = shippingCheckbox.checked;
+            var shippingFee = document.getElementById('shippingFee').value;
+            shippingFee = document.getElementById('shippingFee').textContent
+            document.getElementById('shippingFeePreview').textContent = shippingFee;
+            document.getElementById('previewTotal').textContent = totalAmount + parseInt(shippingFee,10);
+            document.getElementById('namePreview').textContent = document.getElementById('name').value;
+            document.getElementById('phonePreview').textContent = document.getElementById('phone').value;
+            if(shipping){
+                document.getElementById('shippingAddressPreview').textContent = "משלוח ל: " + document.getElementById('addressTextBox').value;
+            }
+
+            let paymentMethod = document.querySelector('input[name="paymentOption"]:checked')?.value;
+            let paymentComment = " (מסירת ההזמנה מותנית ב";
+            if(shipping){
+                if(paymentMethod == "מזומן"){
+                    paymentComment += "תשלום לשליח)"
+                }
+                else{
+                    paymentComment += "הצגת אישור תשלום לשליח)"
+                }
+            }
+            else{
+                if(paymentMethod == "מזומן"){
+                    paymentComment += "תשלום בדוכן)"
+                }
+                else{
+                    paymentComment += "הצגת אישור תשלום בדוכן)"
+                }
+            }
+            
+            document.getElementById('paymentMethodPreview').textContent = paymentMethod + paymentComment;
+            document.getElementById('paymentMethodPreview').style.color = "blue";
+
+            
+
+            // Log the method (or handle the case where no button is selected)
+            
+
+
+            // Hide order page and show preview page
+            document.getElementById('order-page').style.display = 'none';
+            document.getElementById('preview-page').style.display = 'block';
+
+            orders = []; // Reset orders after sending
+        }
+
+        document.querySelector('#newOrderBtn').addEventListener('click', () => {
+            // Reload the page to start a new order
+            location.reload();
+        });
+
+
+    </script>
+</body>
+</html>
