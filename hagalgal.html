@@ -330,6 +330,8 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
+            <h5 style="color: blue;">ארוחה (שווארמה. צ'יפס ושתיה ב₪45 במקום ₪50)</h5>
+
 
             <label class="checkbox-btn2">
                 <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma" data-price="35"><span> שווארמה בפיתה (35₪)</span>
@@ -351,9 +353,6 @@
                 </label>
                 <label class="checkbox-btn">
                     <input type="checkbox" name="options" value="כרוב לבן"> <span>כרוב לבן</span>
-                </label>
-                <label class="checkbox-btn">
-                    <input type="checkbox" name="options" value="כרוב סגול"> <span>כרוב סגול</span>
                 </label>
                 <label class="checkbox-btn">
                     <input type="checkbox" name="options" value="בצל עם סומק"> <span>בצל עם סומק</span>
@@ -521,6 +520,17 @@
                 return total + parseInt(option.dataset.price, 10);
             }, 0);
 
+            // full meal discount
+            const isShawarmaChecked = document.querySelector('input[name="Shawarma"]').checked;
+            const isFriesChecked = document.querySelector('input[name="fries"]').checked;
+            const isCokeChecked = document.querySelector('input[name="coke"]').checked;
+            const isZeroChecked = document.querySelector('input[name="zero"]').checked;
+
+            // Check the condition for the popup
+            if (isShawarmaChecked && isFriesChecked && (isCokeChecked || isZeroChecked)) {
+                price -= 5;
+            }
+
             document.getElementById('price').textContent = price;
         }
 
@@ -615,11 +625,14 @@
                     alert("יש למלא שם ומספר טלפון");
                     return false;
             }
+            // validate phone number
+            const isValid = /^[0-9]{10}$/.test(phone);
 
-            if(phone.length != 10){
+            if (!isValid) {
                 alert("מספר נייד שגוי. נא להכניס מספר בן 10 ספרות");
                 return false;
             }
+         
             if(shippingCheckbox.checked){
                 address = document.getElementById('addressTextBox').value;
                 if(address.length == 0){
