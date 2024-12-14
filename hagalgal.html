@@ -302,7 +302,7 @@
         <form id="orderForm">
             <h2>ברוכים הבאים לגלגל!</h2>
 
-            <input type="text" id="name" name="name" placeholder="שם" maxlength="25" required dir="rtl">
+            <input type="text" id="name" name="name" placeholder="שם ושם משפחה" maxlength="25" required dir="rtl">
 
             <label></label>
             <input type="tel" id="phone" name="phone" placeholder="מספר נייד" maxlength="10" required dir="rtl">
@@ -310,7 +310,7 @@
 
             <label>
                 <input type="checkbox" id="shipping" value="משלוח" data-price="5"> משלוח (₪5)
-                <input type="text" id="addressTextBox" name="addressTextBox" placeholder="כתובת למשלוח" maxlength="30" required readonly>
+                <input type="text" id="addressTextBox" name="addressTextBox" placeholder="כתובת למשלוח" maxlength="35" required readonly>
     
             </label>
 
@@ -330,7 +330,7 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
-            <h5 style="color: blue;">ארוחה (שווארמה, צ'יפס ושתיה) ב₪45 במקום ₪50</h5>
+            <!-- <h5 style="color: blue;">ארוחה (שווארמה, צ'יפס ושתיה) ב₪45 במקום ₪50</h5> -->
 
 
             <label class="checkbox-btn2">
@@ -344,6 +344,9 @@
                 </label>
                 <label class="checkbox-btn">
                     <input type="checkbox" name="options" value="חריף"> <span>חריף</span>
+                </label>
+                <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="חריף מאוד"> <span>חריף מאוד</span>
                 </label>
                 <label class="checkbox-btn">
                     <input type="checkbox" name="options" value="מלפפון"> <span>מלפפון</span>
@@ -526,9 +529,10 @@
             const isCokeChecked = document.querySelector('input[name="coke"]').checked;
             const isZeroChecked = document.querySelector('input[name="zero"]').checked;
 
-            // Check the condition for the popup
+            const discount = 0;
+        
             if (isShawarmaChecked && isFriesChecked && (isCokeChecked || isZeroChecked)) {
-                price -= 5;
+                price -= discount;
             }
 
             document.getElementById('price').textContent = price;
@@ -559,7 +563,7 @@
         var cokeCheckBox = document.getElementById('cokeCheckBox')
         var zeroCheckBox = document.getElementById('zeroCheckBox')
 
-        
+        let stopHafira = false;
         function addOrder() {
             var options = Array.from(document.querySelectorAll('input[name="options"]:checked')).map(option => option.value);
             const price = parseInt(document.getElementById('price').textContent, 10);
@@ -606,6 +610,11 @@
             document.getElementById('price').textContent = "0"; // Reset total price
             document.getElementById('orderOptions').style.display = 'none';
             document.getElementById("orderReviewSection").style.display = 'block'; // Show review section
+
+            if(!stopHafira){
+                alert("ההזמנה לא נשלחה לדוכן, לשליחה- יש ללחוץ על כפתור 'שלח הזמנות' בתחתית העמוד");
+                stopHafira = true;
+            }
         }
 
         function addConstantFieldsToOrders(){
@@ -625,11 +634,18 @@
                     alert("יש למלא שם ומספר טלפון");
                     return false;
             }
-            // validate phone number
-            const isValid = /^[0-9]{10}$/.test(phone);
 
-            if (!isValid) {
-                alert("מספר נייד שגוי. נא להכניס מספר בן 10 ספרות");
+            const isValidName = /^[\u0590-\u05FF]+(?:\s+[\u0590-\u05FF]+)+$/.test(name);
+
+            if(!isValidName){
+                alert("יש למלא שם וגם שם משפחה")
+                return false;
+            }
+            // validate phone number
+            const isValidPhoneNumber = /^[0-9]{10}$/.test(phone);
+
+            if (!isValidPhoneNumber) {
+                alert("מספר נייד שגוי. נא להכניס מספר נייד תקני");
                 return false;
             }
          
