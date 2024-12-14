@@ -635,7 +635,7 @@
                     return false;
             }
 
-            const isValidName = /^[\u0590-\u05FF]+(?:\s+[\u0590-\u05FF]+)+$/.test(name);
+            const isValidName = /^[\u0590-\u05FF]+(?:\s+[\u0590-\u05FF]+)+\s*$/.test(name);
 
             if(!isValidName){
                 alert("יש למלא שם וגם שם משפחה")
@@ -741,12 +741,6 @@
             }
 
             if(!addConstantFieldsToOrders()){
-                return;
-            }
-
-            var userResponse = confirm("הזדמנות אחרונה לעבור על ההזמנה :) להמשיך?");
-
-            if(!userResponse){
                 return;
             }
 
