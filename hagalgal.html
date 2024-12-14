@@ -302,7 +302,7 @@
         <form id="orderForm">
             <h2>ברוכים הבאים לגלגל!</h2>
 
-            <input type="text" id="name" name="name" placeholder="שם" maxlength="25" required dir="rtl">
+            <input type="text" id="name" name="name" placeholder="שם ושם משפחה" maxlength="25" required dir="rtl">
 
             <label></label>
             <input type="tel" id="phone" name="phone" placeholder="מספר נייד" maxlength="10" required dir="rtl">
@@ -310,7 +310,7 @@
 
             <label>
                 <input type="checkbox" id="shipping" value="משלוח" data-price="5"> משלוח (₪5)
-                <input type="text" id="addressTextBox" name="addressTextBox" placeholder="כתובת למשלוח" maxlength="30" required readonly>
+                <input type="text" id="addressTextBox" name="addressTextBox" placeholder="כתובת למשלוח" maxlength="35" required readonly>
     
             </label>
 
@@ -634,10 +634,17 @@
                     alert("יש למלא שם ומספר טלפון");
                     return false;
             }
-            // validate phone number
-            const isValid = /^[0-9]{10}$/.test(phone);
 
-            if (!isValid) {
+            const isValidName = /^[\u0590-\u05FF]+(?:\s+[\u0590-\u05FF]+)+$/.test(name);
+
+            if(!isValidName){
+                alert("יש למלא שם וגם שם משפחה")
+                return false;
+            }
+            // validate phone number
+            const isValidPhoneNumber = /^[0-9]{10}$/.test(phone);
+
+            if (!isValidPhoneNumber) {
                 alert("מספר נייד שגוי. נא להכניס מספר נייד תקני");
                 return false;
             }
