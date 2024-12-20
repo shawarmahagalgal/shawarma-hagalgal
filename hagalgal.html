@@ -382,9 +382,9 @@
             <label class="checkbox-btn2">
                 <input type="checkbox" id="cokeCheckBox" name="coke" value="קולה" data-price="5"><span> פחית קולה (5₪)</span>
             </label>
-            <label class="checkbox-btn2">
+            <!-- <label class="checkbox-btn2">
                 <input type="checkbox" id="zeroCheckBox" name="zero" value="זירו" data-price="5"><span> פחית זירו (5₪)</span>
-            </label>
+            </label> -->
 
             <label></label>
             <input type="text" id="dishComments" name="dishComments" placeholder="הערות/שם לזיהוי מנה" maxlength="25" required dir="rtl">
@@ -514,11 +514,17 @@
         shippingCheckbox.addEventListener('click', updateShippingFee);
 
 
-        const checkboxes = document.querySelectorAll('input[name="Shawarma"], input[name="fries"], input[name="coke"], input[name="zero"]');
+        // all options available:
+        // const checkboxes = document.querySelectorAll('input[name="Shawarma"], input[name="fries"], input[name="coke"], input[name="zero"]');
+        const checkboxes = document.querySelectorAll('input[name="Shawarma"], input[name="fries"], input[name="coke"]');
+
         checkboxes.forEach(checkbox => checkbox.addEventListener('change', updatePrice));
 
         function updatePrice() {
-            const selectedOptions = Array.from(document.querySelectorAll('input[name="Shawarma"]:checked, input[name="fries"]:checked, input[name="coke"]:checked, input[name="zero"]:checked'));
+            // all options available:
+            //const selectedOptions = Array.from(document.querySelectorAll('input[name="Shawarma"]:checked, input[name="fries"]:checked, input[name="coke"]:checked, input[name="zero"]:checked'));
+            const selectedOptions = Array.from(document.querySelectorAll('input[name="Shawarma"]:checked, input[name="fries"]:checked, input[name="coke"]:checked'));
+
             var price = selectedOptions.reduce((total, option) => {
                 return total + parseInt(option.dataset.price, 10);
             }, 0);
@@ -527,11 +533,11 @@
             const isShawarmaChecked = document.querySelector('input[name="Shawarma"]').checked;
             const isFriesChecked = document.querySelector('input[name="fries"]').checked;
             const isCokeChecked = document.querySelector('input[name="coke"]').checked;
-            const isZeroChecked = document.querySelector('input[name="zero"]').checked;
+            //const isZeroChecked = document.querySelector('input[name="zero"]').checked;
 
             const discount = 0;
         
-            if (isShawarmaChecked && isFriesChecked && (isCokeChecked || isZeroChecked)) {
+            if (isShawarmaChecked && isFriesChecked && (isCokeChecked )){//|| isZeroChecked)) {
                 price -= discount;
             }
 
@@ -561,7 +567,7 @@
         var ShawarmaCheckBox = document.getElementById('ShawarmaCheckBox')
         var friesCheckBox = document.getElementById('friesCheckBox')
         var cokeCheckBox = document.getElementById('cokeCheckBox')
-        var zeroCheckBox = document.getElementById('zeroCheckBox')
+        //var zeroCheckBox = document.getElementById('zeroCheckBox')
 
         let stopHafira = false;
         function addOrder() {
@@ -569,18 +575,19 @@
             const price = parseInt(document.getElementById('price').textContent, 10);
             const additions = friesCheckBox.checked ? friesCheckBox.value : "";
             const coke = cokeCheckBox.checked ? cokeCheckBox.value : "";
-            const zero = zeroCheckBox.checked ? zeroCheckBox.value : "";
+            //const zero = zeroCheckBox.checked ? zeroCheckBox.value : "";
             const address = "";
             const name = "";
             const phone = "";
             const paymentMethod = "";
             var dishCommentsTmp = document.getElementById('dishComments').value;
             const dishComments = dishCommentsTmp ? dishCommentsTmp : "";
-            const drinks = [cokeCheckBox.checked ? cokeCheckBox.value : "", zeroCheckBox.checked ? zeroCheckBox.value : ""]
-                .filter(Boolean)
-                .join(",");
+            const drinks = cokeCheckBox.checked ? cokeCheckBox.value : "";
+            // const drinks = [cokeCheckBox.checked ? cokeCheckBox.value : "", zeroCheckBox.checked ? zeroCheckBox.value : ""]
+            //     .filter(Boolean)
+            //     .join(",");
 
-            if (!ShawarmaCheckBox.checked && !friesCheckBox.checked && !cokeCheckBox.checked && !zeroCheckBox.checked) {
+            if (!ShawarmaCheckBox.checked && !friesCheckBox.checked && !cokeCheckBox.checked /*&& !zeroCheckBox.checked*/) {
                 alert("לא נבחרה מנה");
                 return;
             }
@@ -602,7 +609,7 @@
             orders.push(order);
             updateOrderReview();
 
-            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox, #friesCheckBox , #cokeCheckBox ,#zeroCheckBox');
+            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox, #friesCheckBox , #cokeCheckBox '/*,#zeroCheckBox'*/);
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false; // Uncheck each checkbox
             });
