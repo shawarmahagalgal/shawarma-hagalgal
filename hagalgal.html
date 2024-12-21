@@ -606,7 +606,7 @@
             orders.push(order);
             updateOrderReview();
 
-            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox, #friesCheckBox , #cokeCheckBox '/*,#zeroCheckBox'*/);
+            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox, #friesCheckBox , #cokeCheckBox, #zeroCheckBox');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false; // Uncheck each checkbox
             });
