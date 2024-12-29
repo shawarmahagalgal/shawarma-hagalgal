@@ -24,7 +24,12 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 drinksOptions.style.display = 'block'; // Show the group
             } else {
                 drinksOptions.style.display = 'none'; // Hide the group
+                const checkboxes = document.querySelectorAll('#drinksCheckBox, #drinksOptions input[type="radio"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false; // Uncheck each checkbox
+                });
             }
+            updatePrice();
         });
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
@@ -163,7 +168,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             var dishCommentsTmp = document.getElementById('dishComments').value;
             const dishComments = dishCommentsTmp ? dishCommentsTmp : "";
 
-            if (!ShawarmaCheckBox.checked && !friesCheckBox.checked && !drinksCheckBox) {
+            if (!ShawarmaCheckBox.checked && !friesCheckBox.checked && !drinksCheckBox.checked) {
                 alert("לא נבחרה מנה");
                 return;
             }
