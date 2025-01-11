@@ -335,6 +335,12 @@
         .multi-color-radio-btn input[value="ענבים"]:checked + span {
             color: purple;
         }
+        .multi-color-radio-btn input[value="צ'יפס"]:checked + span {
+            color: green;
+        }
+        .multi-color-radio-btn input[value="פוטטוס"]:checked + span {
+            color: green;
+        }
         
     </style>
 </head>
@@ -417,11 +423,20 @@
                 </label>
             </div>
             
-            
-
             <label class="checkbox-btn2">
-                <input type="checkbox" id="friesCheckBox" name="fries" value="צ'יפס" data-price="10"><span> צ'יפס (10₪)</span>
+                <input type="checkbox" id="sidesCheckBox" name="sides"><span>תוספות</span>
             </label>
+
+            <div id="sidesOptions" class="radio-group" style="display: none;">
+                <label class="multi-color-radio-btn">
+                    <input type="radio" name="sideOption" value="צ'יפס" data-price="10"> <span>צ'יפס (10₪)</span>
+                </label>
+                <label class="multi-color-radio-btn">
+                    <input type="radio" name="sideOption" value="פוטטוס" data-price="12"> <span>פוטטוס (12₪)</span>
+                </label>
+            </div>
+
+         
             <label class="checkbox-btn2">
                 <input type="checkbox" id="drinksCheckBox" name="drinks"><span>שתייה</span>
             </label>
@@ -443,7 +458,6 @@
                     <input type="radio" name="drinkOption" value="ענבים" data-price="8"> <span>פריגת ענבים 0.5 ליטר (8₪)</span>
                 </label>     
             </div>
-            
 
             <label></label>
             <input type="text" id="dishComments" name="dishComments" placeholder="הערות/שם לזיהוי מנה" maxlength="25" required dir="rtl">
