@@ -46,6 +46,21 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             updatePrice();
         });
 
+        const wrappingOptions = document.getElementById('wrappingOptions');
+        document.getElementById('ShawarmaCheckBox').addEventListener('change', function () {
+            if (this.checked) {
+                wrappingOptions.style.display = 'block'; // Show the group
+            } else {
+                wrappingOptions.style.display = 'none'; // Hide the group
+                const checkboxes = document.querySelectorAll('#ShawarmaCheckBox, #wrappingOptions input[type="radio"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false; // Uncheck each checkbox
+                });
+            }
+            updatePrice();
+        });
+
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
         import { getDatabase, push, ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
@@ -111,11 +126,11 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
         shippingCheckbox.addEventListener('click', updateShippingFee);
 
 
-        const checkboxes = document.querySelectorAll('input[name="Shawarma"], #sidesOptions input[type="radio"], #drinksOptions input[type="radio"]');
+        const checkboxes = document.querySelectorAll('#wrappingOptions input[type="radio"], #sidesOptions input[type="radio"], #drinksOptions input[type="radio"]');
         checkboxes.forEach(checkbox => checkbox.addEventListener('change', updatePrice));
 
         function updatePrice() {
-            const selectedOptions = Array.from(document.querySelectorAll('input[name="Shawarma"]:checked, #sidesOptions input[type="radio"]:checked, #drinksOptions input[type="radio"]:checked'));
+            const selectedOptions = Array.from(document.querySelectorAll('#wrappingOptions input[type="radio"]:checked, #sidesOptions input[type="radio"]:checked, #drinksOptions input[type="radio"]:checked'));
             var price = selectedOptions.reduce((total, option) => {
                 return total + parseInt(option.dataset.price, 10);
             }, 0);
@@ -174,6 +189,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
         let stopHafira = false;
         function addOrder() {
             var options = Array.from(document.querySelectorAll('input[name="options"]:checked')).map(option => option.value);
+            var wrapping = Array.from(document.querySelectorAll('input[name="wrappingOption"]:checked')).map(option => option.value);
             var drinks = Array.from(document.querySelectorAll('input[name="drinkOption"]:checked')).map(option => option.value);
             var additions = Array.from(document.querySelectorAll('input[name="sideOption"]:checked')).map(option => option.value);
             const price = parseInt(document.getElementById('price').textContent, 10);
@@ -189,12 +205,18 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 return;
             }
 
+            if (ShawarmaCheckBox.checked && !wrapping.length) {
+                alert("יש לבחור במה לשים את השווארמה");
+                return;
+            }
+
+
             if (ShawarmaCheckBox.checked && !options.length) {
-                var userResponse = confirm("לא נבחרו תוספות לשווארמה. תרצו רק פיתה עם בשר? (זה בסדר, אנחנו לא שופטים :) )");
+                var userResponse = confirm("לא נבחרו תוספות לשווארמה. תרצו רק בשר? (זה בסדר, אנחנו לא שופטים :) )");
                 if(!userResponse){
                     return;
                 }
-                options = ["פיתה עם בשר, אנשים מוזרים... (סליחה ששפטנו)"];
+                options = ["רק בשר, אנשים מוזרים... (סליחה ששפטנו)"];
             }
 
             if(drinksCheckBox.checked && !drinks.length){
@@ -219,12 +241,12 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 additions = [""];
             }
             const orderTime = "";
-            const order = {name, phone , options, additions, drinks, address, dishComments, price, paymentMethod, orderTime };
+            const order = {name, phone ,wrapping, options, additions, drinks, address, dishComments, price, paymentMethod, orderTime };
 
             orders.push(order);
             updateOrderReview();
 
-            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox, #sidesCheckBox, #sidesOptions input[type="radio"] , #drinksCheckBox, #drinksOptions input[type="radio"]');
+            const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox,#wrappingOptions input[type="radio"], #sidesCheckBox, #sidesOptions input[type="radio"] , #drinksCheckBox, #drinksOptions input[type="radio"]');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false; // Uncheck each checkbox
             });
@@ -233,6 +255,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             document.getElementById('orderOptions').style.display = 'none';
             document.getElementById('drinksOptions').style.display = 'none';
             document.getElementById('sidesOptions').style.display = 'none';
+            document.getElementById('wrappingOptions').style.display = 'none';
             document.getElementById("orderReviewSection").style.display = 'block'; // Show review section
 
             if(!stopHafira){
@@ -303,7 +326,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
 
             // Add options with prefix if not empty
             if (order.options && order.options.length > 0 && order.options[0].trim() !== '') {
-                orderDetails.push(`שווארמה בפיתה עם: ${order.options.join(', ')}`);
+                orderDetails.push(`שווארמה ${order.wrapping} עם: ${order.options.join(', ')}`);
             }
 
             // Add additions if not empty
