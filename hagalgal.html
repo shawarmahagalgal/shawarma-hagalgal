@@ -341,6 +341,12 @@
         .multi-color-radio-btn input[value="פוטטוס"]:checked + span {
             color: green;
         }
+        .multi-color-radio-btn input[value="בפיתה"]:checked + span {
+            color: blue;
+        }
+        .multi-color-radio-btn input[value="בלאפה"]:checked + span {
+            color: blue;
+        }
         
     </style>
 </head>
@@ -383,8 +389,17 @@
 
 
             <label class="checkbox-btn2">
-                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma" data-price="35"><span> שווארמה בפיתה (35₪)</span>
+                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span>שווארמה</span>
             </label>
+
+            <div id="wrappingOptions" class="radio-group" style="display: none;">
+                <label class="multi-color-radio-btn">
+                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="35"> <span>בפיתה (35₪)</span>
+                </label>
+                <label class="multi-color-radio-btn">
+                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="45"> <span>בלאפה (45₪)</span>
+                </label>
+            </div>
 
 
             <div id="orderOptions" class="checkbox-group" style="display: none;">
@@ -424,7 +439,7 @@
             </div>
             
             <label class="checkbox-btn2">
-                <input type="checkbox" id="sidesCheckBox" name="sides"><span>מטוגנים</span>
+                <input type="checkbox" id="sidesCheckBox" name="sides"><span>תוספות</span>
             </label>
 
             <div id="sidesOptions" class="radio-group" style="display: none;">
