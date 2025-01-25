@@ -230,6 +230,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             if(!ShawarmaCheckBox.checked){
+                wrapping = [""];
                 options = [""];
             }
             
