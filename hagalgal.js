@@ -247,6 +247,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
 
             orders.push(order);
             updateOrderReview();
+            updateInventory(order, false);
 
             const checkboxes = document.querySelectorAll('#orderOptions input[type="checkbox"],#ShawarmaCheckBox,#wrappingOptions input[type="radio"], #sidesCheckBox, #sidesOptions input[type="radio"] , #drinksCheckBox, #drinksOptions input[type="radio"]');
             checkboxes.forEach(checkbox => {
@@ -360,6 +361,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                                                           </div>`;
                 orderDiv.querySelector('button').addEventListener('click', function() {
                     removeOrder(indexToRemove);
+                    updateInventory(order, true);
                 });
             }
             else{
@@ -454,44 +456,48 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             orders = []; // Reset orders after sending
         }
 
-        async function updateInventory() {
+        var currenOrderInventory = {
+            lafa: 0,
+            pita: 0,
+            coke: 0,
+            fries: 0,
+            potato: 0,
+            zero: 0,
+            grape: 0,
+            fuzeTea: 0,
+            sprite: 0,
+            schweppes: 0
+        }; 
+
+
+        async function initInventory(){
             const inventoryRef = ref(db, "config/inventory");
-    
-            var pita = 0;
-            var lafa = 0;
-            var potato = 0;
-            var fries = 0;
-            var coke = 0;
-            var zero = 0;
-            var grape = 0;
-            var fuzeTea = 0;
-            var sprite = 0;
-            var schweppes = 0;
-    
-    
-            try {
-                const snapshot = await get(inventoryRef);
-                if (snapshot.exists()) {
-                    const inventory = snapshot.val();
-                    pita = inventory.pita;
-                    lafa = inventory.lafa;
-                    potato = inventory.potato;
-                    fries = inventory.fries;
-                    coke = inventory.coke;
-                    zero = inventory.zero;
-                    grape = inventory.grape;
-                    fuzeTea = inventory.fuzeTea;
-                    sprite = inventory.sprite;
-                    schweppes = inventory.schweppes;
-                } else {
-                    console.log("No inventory data available");
+
+                try {
+                    const snapshot = await get(inventoryRef);
+                    if (snapshot.exists()) {
+                        const inventory = snapshot.val();
+                        currenOrderInventory.pita = inventory.pita;
+                        currenOrderInventory.lafa = inventory.lafa;
+                        currenOrderInventory.potato = inventory.potato;
+                        currenOrderInventory.fries = inventory.fries;
+                        currenOrderInventory.coke = inventory.coke;
+                        currenOrderInventory.zero = inventory.zero;
+                        currenOrderInventory.grape = inventory.grape;
+                        currenOrderInventory.fuzeTea = inventory.fuzeTea;
+                        currenOrderInventory.sprite = inventory.sprite;
+                        currenOrderInventory.schweppes = inventory.schweppes;
+                    } else {
+                        console.log("No inventory data available");
+                    }
+                } catch (error) {
+                    console.error("Error loading shop status:", error);
                 }
-            } catch (error) {
-                console.error("Error loading shop status:", error);
-            }
-    
+        }
+
+        function applyInventoryToView(){
             var radioButton = document.querySelector('input[name="wrappingOption"][value="בלאפה"]');
-            if(lafa === 0 ){
+            if(currenOrderInventory.lafa === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -501,7 +507,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="wrappingOption"][value="בפיתה"]');
-            if(pita === 0 ){
+            if(currenOrderInventory.pita === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -511,7 +517,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="sideOption"][value="ציפס"]');
-            if(fries === 0 ){
+            if(currenOrderInventory.fries === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -521,7 +527,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="sideOption"][value="פוטטוס"]');
-            if(potato === 0 ){
+            if(currenOrderInventory.potato === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -531,7 +537,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="drinkOption"][value="קולה"]');
-            if(coke === 0 ){
+            if(currenOrderInventory.coke === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -541,7 +547,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="drinkOption"][value="זירו"]');
-            if(zero === 0 ){
+            if(currenOrderInventory.zero === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -551,7 +557,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="drinkOption"][value="ספרייט"]');
-            if(sprite === 0 ){
+            if(currenOrderInventory.sprite === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -561,7 +567,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="drinkOption"][value="פיוזטי"]');
-            if(fuzeTea === 0 ){
+            if(currenOrderInventory.fuzeTea === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -571,7 +577,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="drinkOption"][value="שוופס פירות"]');
-            if(schweppes === 0 ){
+            if(currenOrderInventory.schweppes === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.5;
             }
@@ -579,10 +585,83 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 radioButton.disabled = false;
                 radioButton.parentElement.style.opacity = 1;
             }
-           
+
+            radioButton = document.querySelector('input[name="drinkOption"][value="ענבים"]');
+            if(currenOrderInventory.grape === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+        }
+
+        
+        function updateCount(count, deleted){
+            if(deleted){
+                return ++count;
+            }
+            if(count > 0){
+                --count;
+            }
+            return count;
+        }
+
+        function updateInventory(order, deleted) {
+                switch (order.drinks[0]){
+                case "קולה":
+                    currenOrderInventory.coke = updateCount(currenOrderInventory.coke, deleted);
+                    break;
+                case "זירו":
+                    currenOrderInventory.zero = updateCount(currenOrderInventory.zero, deleted);
+                    break;
+                case "פיוזטי":
+                    currenOrderInventory.fuzeTea = updateCount(currenOrderInventory.fuzeTea, deleted);
+                    break;
+                case "ענבים":
+                    currenOrderInventory.grape = updateCount(currenOrderInventory.grape, deleted);
+                    break;
+                case "ספרייט":
+                    currenOrderInventory.sprite = updateCount(currenOrderInventory.sprite, deleted);
+                    break;
+                case "שוופס פירות":
+                    currenOrderInventory.schweppes = updateCount(currenOrderInventory.schweppes, deleted);
+                    break;
+                default:
+                    break;
+                
+            }
+
+            switch (order.wrapping[0]){
+                case "בפיתה":
+                    currenOrderInventory.pita = updateCount(currenOrderInventory.pita, deleted);
+                    break;
+                case "בלאפה":
+                    currenOrderInventory.lafa = updateCount(currenOrderInventory.lafa, deleted);
+                    break;
+                default:
+                    break;
+                
+            }
+
+            switch (order.additions[0]){
+                case "ציפס":
+                    currenOrderInventory.fries = updateCount(currenOrderInventory.fries, deleted);
+                    break;
+                case "פוטטוס":
+                    currenOrderInventory.potato = updateCount(currenOrderInventory.potato, deleted);
+                    break;
+                default:
+                    break;
+                
+            }   
+            
+            applyInventoryToView();
         }            
 
-        updateInventory();
+        await initInventory();
+        applyInventoryToView();
 
         document.querySelector('#newOrderBtn').addEventListener('click', () => {
             // Reload the page to start a new order
