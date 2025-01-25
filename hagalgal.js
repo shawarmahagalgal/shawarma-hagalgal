@@ -446,11 +446,6 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             document.getElementById('paymentMethodPreview').textContent = paymentMethod + paymentComment;
             document.getElementById('paymentMethodPreview').style.color = "blue";
 
-            
-
-            // Log the method (or handle the case where no button is selected)
-            
-
 
             // Hide order page and show preview page
             document.getElementById('order-page').style.display = 'none';
@@ -458,6 +453,136 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
 
             orders = []; // Reset orders after sending
         }
+
+        async function updateInventory() {
+            const inventoryRef = ref(db, "config/inventory");
+    
+            var pita = 0;
+            var lafa = 0;
+            var potato = 0;
+            var fries = 0;
+            var coke = 0;
+            var zero = 0;
+            var grape = 0;
+            var fuzeTea = 0;
+            var sprite = 0;
+            var schweppes = 0;
+    
+    
+            try {
+                const snapshot = await get(inventoryRef);
+                if (snapshot.exists()) {
+                    const inventory = snapshot.val();
+                    pita = inventory.pita;
+                    lafa = inventory.lafa;
+                    potato = inventory.potato;
+                    fries = inventory.fries;
+                    coke = inventory.coke;
+                    zero = inventory.zero;
+                    grape = inventory.grape;
+                    fuzeTea = inventory.fuzeTea;
+                    sprite = inventory.sprite;
+                    schweppes = inventory.schweppes;
+                } else {
+                    console.log("No inventory data available");
+                }
+            } catch (error) {
+                console.error("Error loading shop status:", error);
+            }
+    
+            var radioButton = document.querySelector('input[name="wrappingOption"][value="בלאפה"]');
+            if(lafa === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="wrappingOption"][value="בפיתה"]');
+            if(pita === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="sideOption"][value="ציפס"]');
+            if(fries === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="sideOption"][value="פוטטוס"]');
+            if(potato === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="drinkOption"][value="קולה"]');
+            if(coke === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="drinkOption"][value="זירו"]');
+            if(zero === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="drinkOption"][value="ספרייט"]');
+            if(sprite === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="drinkOption"][value="פיוזטי"]');
+            if(fuzeTea === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+
+            radioButton = document.querySelector('input[name="drinkOption"][value="שוופס פירות"]');
+            if(schweppes === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.5;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
+           
+        }            
+
+        updateInventory();
 
         document.querySelector('#newOrderBtn').addEventListener('click', () => {
             // Reload the page to start a new order
