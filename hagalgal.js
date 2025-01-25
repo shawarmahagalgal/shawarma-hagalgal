@@ -241,7 +241,8 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 additions = [""];
             }
             const orderTime = "";
-            const order = {name, phone ,wrapping, options, additions, drinks, address, dishComments, price, paymentMethod, orderTime };
+            const inventoryUpdated = false;
+            const order = {name, phone ,wrapping, options, additions, drinks, address, dishComments, price, paymentMethod, orderTime, inventoryUpdated };
 
             orders.push(order);
             updateOrderReview();
