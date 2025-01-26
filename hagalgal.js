@@ -658,10 +658,14 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }   
             
             applyInventoryToView();
-        }            
+        }  
 
-        await initInventory();
-        applyInventoryToView();
+        async function initInventoryWrapper(){
+                await initInventory();
+                applyInventoryToView();
+        }
+
+        initInventoryWrapper();
 
         document.querySelector('#newOrderBtn').addEventListener('click', () => {
             // Reload the page to start a new order
