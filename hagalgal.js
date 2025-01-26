@@ -499,7 +499,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             var radioButton = document.querySelector('input[name="wrappingOption"][value="בלאפה"]');
             if(currenOrderInventory.lafa === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="wrappingOption"][value="בפיתה"]');
             if(currenOrderInventory.pita === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -519,7 +519,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="sideOption"][value="ציפס"]');
             if(currenOrderInventory.fries === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="sideOption"][value="פוטטוס"]');
             if(currenOrderInventory.potato === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -539,7 +539,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="drinkOption"][value="קולה"]');
             if(currenOrderInventory.coke === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -549,7 +549,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="drinkOption"][value="זירו"]');
             if(currenOrderInventory.zero === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -559,7 +559,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="drinkOption"][value="ספרייט"]');
             if(currenOrderInventory.sprite === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -569,7 +569,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="drinkOption"][value="פיוזטי"]');
             if(currenOrderInventory.fuzeTea === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -579,7 +579,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="drinkOption"][value="שוופס פירות"]');
             if(currenOrderInventory.schweppes === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
@@ -589,7 +589,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             radioButton = document.querySelector('input[name="drinkOption"][value="ענבים"]');
             if(currenOrderInventory.grape === 0 ){
                 radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.5;
+                radioButton.parentElement.style.opacity = 0.4;
             }
             else{
                 radioButton.disabled = false;
