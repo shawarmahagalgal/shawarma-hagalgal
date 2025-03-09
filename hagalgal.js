@@ -576,7 +576,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 radioButton.parentElement.style.opacity = 1;
             }
 
-            radioButton = document.querySelector('input[name="drinkOption"][value="שוופס פירות"]');
+            radioButton = document.querySelector('input[name="drinkOption"][value="תות בננה"]');
             if(currenOrderInventory.schweppes === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.4;
@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 case "ספרייט":
                     currenOrderInventory.sprite = updateCount(currenOrderInventory.sprite, deleted);
                     break;
-                case "שוופס פירות":
+                case "תות בננה":
                     currenOrderInventory.schweppes = updateCount(currenOrderInventory.schweppes, deleted);
                     break;
                 default:
