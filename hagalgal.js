@@ -595,6 +595,15 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 radioButton.disabled = false;
                 radioButton.parentElement.style.opacity = 1;
             }
+            radioButton = document.querySelector('input[name="drinkOption"][value="מים"]');
+            if(currenOrderInventory.water === 0 ){
+                radioButton.disabled = true;
+                radioButton.parentElement.style.opacity = 0.4;
+            }
+            else{
+                radioButton.disabled = false;
+                radioButton.parentElement.style.opacity = 1;
+            }
         }
 
         
@@ -621,6 +630,9 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                     break;
                 case "ענבים":
                     currenOrderInventory.grape = updateCount(currenOrderInventory.grape, deleted);
+                    break;
+                case "מים":
+                    currenOrderInventory.water = updateCount(currenOrderInventory.water, deleted);
                     break;
                 case "ספרייט":
                     currenOrderInventory.sprite = updateCount(currenOrderInventory.sprite, deleted);
