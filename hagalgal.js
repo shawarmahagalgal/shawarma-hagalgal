@@ -464,6 +464,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             potato: 0,
             zero: 0,
             grape: 0,
+            water: 0,
             fuzeTea: 0,
             sprite: 0,
             schweppes: 0
@@ -484,6 +485,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                         currenOrderInventory.coke = inventory.coke;
                         currenOrderInventory.zero = inventory.zero;
                         currenOrderInventory.grape = inventory.grape;
+                        currenOrderInventory.water = inventory.water;
                         currenOrderInventory.fuzeTea = inventory.fuzeTea;
                         currenOrderInventory.sprite = inventory.sprite;
                         currenOrderInventory.schweppes = inventory.schweppes;
