@@ -578,25 +578,25 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 radioButton.parentElement.style.opacity = 1;
             }
 
-            radioButton = document.querySelector('input[name="drinkOption"][value="תות בננה"]');
-            if(currenOrderInventory.schweppes === 0 ){
-                radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.4;
-            }
-            else{
-                radioButton.disabled = false;
-                radioButton.parentElement.style.opacity = 1;
-            }
+            //radioButton = document.querySelector('input[name="drinkOption"][value="תות בננה"]');
+            //if(currenOrderInventory.schweppes === 0 ){
+            //    radioButton.disabled = true;
+            //    radioButton.parentElement.style.opacity = 0.4;
+            //}
+            //else{
+            //    radioButton.disabled = false;
+            //    radioButton.parentElement.style.opacity = 1;
+            //}
 
-            radioButton = document.querySelector('input[name="drinkOption"][value="ענבים"]');
-            if(currenOrderInventory.grape === 0 ){
-                radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.4;
-            }
-            else{
-                radioButton.disabled = false;
-                radioButton.parentElement.style.opacity = 1;
-            }
+            //radioButton = document.querySelector('input[name="drinkOption"][value="ענבים"]');
+            //if(currenOrderInventory.grape === 0 ){
+            //    radioButton.disabled = true;
+            //    radioButton.parentElement.style.opacity = 0.4;
+            //}
+            //else{
+            //    radioButton.disabled = false;
+            //    radioButton.parentElement.style.opacity = 1;
+            //}
             radioButton = document.querySelector('input[name="drinkOption"][value="מים"]');
             if(currenOrderInventory.water === 0 ){
                 radioButton.disabled = true;
