@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             //    radioButton.parentElement.style.opacity = 1;
             //}
             radioButton = document.querySelector('input[name="drinkOption"][value="מים"]');
-            if(currenOrderInventory.water === 0 ){
+            if(radioButton !== null && currenOrderInventory.water === 0 ){
                 radioButton.disabled = true;
                 radioButton.parentElement.style.opacity = 0.4;
             }
