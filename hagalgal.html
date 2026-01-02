@@ -5,20 +5,22 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-  #celebration-text {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 48px;
-    font-weight: bold;
-    color: #c62828;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-    opacity: 0;
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 0.5s;
-    z-index: 9999;
-  }
+ #celebration-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 52px;
+  font-weight: bold;
+  color: #FFA726; /* כתום בהיר */
+  white-space: nowrap; /* מונע ירידת שורה */
+  text-shadow: 2px 2px 12px rgba(0,0,0,0.35);
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.5s;
+  z-index: 9999;
+}
+
 
   @keyframes fadeIn {
     to {
@@ -565,24 +567,27 @@
     <div id="celebration-text">🎉 הגלגל חוגג שנה 🎉</div>
 
     <script>
-  const duration = 2000;
-  const end = Date.now() + duration;
+        const duration = 2500;
+const end = Date.now() + duration;
 
-  (function frame() {
-    confetti({
-      particleCount: 6,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+(function frame() {
+  confetti({
+    particleCount: 7,
+    spread: 90,
+    startVelocity: 45,
+    origin: { x: Math.random(), y: 1 } // מלמטה
+  });
 
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
-  })();
+  if (Date.now() < end) {
+    requestAnimationFrame(frame);
+  }
+})();
+
+
 
   setTimeout(() => {
     document.getElementById("celebration-text").style.display = "none";
-  }, 3000);
+  }, 5000);
 </script>
 
 
