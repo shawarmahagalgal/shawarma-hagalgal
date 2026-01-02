@@ -24,6 +24,32 @@
      
 }
 
+.deal-pop {
+  color: #1565ff;
+  font-weight: bold;
+  animation: popIn 0.8s ease-out;
+}
+
+.deal-pop span {
+  color: #e53935;
+  margin-right: 4px;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
 
   @keyframes fadeIn {
     to {
@@ -426,8 +452,11 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
-            <!-- <h5 style="color: blue;">חדש!!! ארוחה (שווארמה, 5כדורי פאלאפל ופחית שתייה) ב₪45  </h5> -->
-
+            <h5 class="deal-pop">
+                🔥 חדש! ארוחה (שווארמה, 5 כדורי פלאפל ופחית שתייה) –
+                <span>₪45</span>
+              </h5>
+              
 
             <label class="checkbox-btn2">
                 <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה ספיישל עגל </span>

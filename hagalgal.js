@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
 
             const discount = 5;
         
-            if (isShawarmaChecked && (issidesChecked) /*&& !sides.lenght)*/ && (isDrinkChecked /*&& !drinks.length*/ )) {
+            if (isShawarmaChecked && (issidesChecked && sides.length) && (isDrinkChecked && drinks.length)) {
                 price -= discount;
             }
 
