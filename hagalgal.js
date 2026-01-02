@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             var sides = Array.from(document.querySelectorAll('input[name="sideOption"]:checked')).map(option => option.value);
 
 
-            const discount = 0;
+            const discount = 5;
         
             if (isShawarmaChecked && (issidesChecked && !sides.lenght) && (isDrinkChecked && !drinks.length)) {
                 price -= discount;
