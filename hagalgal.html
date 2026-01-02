@@ -7,16 +7,16 @@
 <style>
  #celebration-text {
   position: fixed;
-  top: 50%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: clamp(22px, 5vw, 48px);
   font-weight: bold;
-  color: #FFA726; /* כתום בהיר */
+  color: #c47704; /* כתום בהיר */
   white-space: nowrap; /* מונע ירידת שורה */
   text-shadow: 2px 2px 12px rgba(0,0,0,0.35);
   opacity: 0;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 1.5s ease forwards;
   animation-delay: 0.5s;
   z-index: 9999;
   max-width: 90vw;
@@ -25,9 +25,9 @@
 }
 
 .deal-pop {
-  color: #1565ff;
+  color: #1a3dda;
   font-weight: bold;
-  animation: popIn 0.8s ease-out;
+  animation: popIn 2s ease-out;
 }
 
 .deal-pop span {
@@ -453,8 +453,7 @@
 
             <p><strong>מה תרצו להזמין?</strong></p>
             <h5 class="deal-pop">
-                🔥 חדש! ארוחה (שווארמה, 5 כדורי פלאפל ופחית שתייה) –
-                <span>₪45</span>
+                🔥 חדש! קונים ארוחה (שווארמה, 5 כדורי פלאפל/ציפס ושתייה) ומקבלים 5₪ הנחה
               </h5>
               
 
@@ -466,12 +465,12 @@
                 <label class="multi-color-radio-btn">
                     <input type="radio" name="wrappingOption" value="בפיתה" data-price="39"> <span>בפיתה (39₪)</span>
                 </label>
-                <label class="multi-color-radio-btn">
+                <!-- <label class="multi-color-radio-btn">
                     <input type="radio" name="wrappingOption" value="בלאפה" data-price="49"> <span>בלאפה (49₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
                     <input type="radio" name="wrappingOption" value="חמגשית" data-price="45"> <span>חדש! מבצע: פיתה+ 5 כדורי פלאפל גדולים + פחית (45₪) </span>
-                </label>
+                </label> -->
             </div>
 
 
@@ -520,7 +519,7 @@
                     <input type="radio" name="sideOption" value="ציפס" data-price="10"> <span>צ'יפס (10₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="sideOption" value="פוטטוס" data-price="6"> <span>5חדש! 5כדורי פלאפל גדולים (7₪)</span>
+                    <input type="radio" name="sideOption" value="פוטטוס" data-price="6"> <span>חדש! 5 כדורי פלאפל גדולים (6₪)</span>
                 </label>
             </div>
 
@@ -536,9 +535,9 @@
                 <label class="multi-color-radio-btn">
                     <input type="radio" name="drinkOption" value="זירו" data-price="5"> <span>פחית זירו (5₪)</span>
                 </label>
-                <label class="multi-color-radio-btn">
+                <!-- <label class="multi-color-radio-btn">
                     <input type="radio" name="drinkOption" value="ספרייט" data-price="3"> <span>כוס ענבים 330מ"ל (לא זמין במשלוח) (3₪)</span>
-                </label> 
+                </label>  -->
                 <label class="multi-color-radio-btn">
                     <input type="radio" name="drinkOption" value="פיוזטי" data-price="8"> <span>לימוננע 0.5 ליטר (8₪)</span>
                 </label>
@@ -554,7 +553,7 @@
             </div>
 
             <label></label>
-            <input type="text" id="dishComments" name="dishComments" placeholder="הערות/שם לזיהוי מנה" maxlength="25" required dir="rtl">
+            <input type="text" id="dishComments" name="dishComments" placeholder="הערות/שם לזיהוי מנה" maxlength="30" required dir="rtl">
             <label></label>
 
             <p><strong> מחיר מנה:</strong> <span id="price">0</span></p>
@@ -599,21 +598,28 @@
     <div id="celebration-text">🎉 הגלגל חוגג שנה 🎉</div>
 
     <script>
-        const duration = 2500;
-const end = Date.now() + duration;
-
-(function frame() {
-  confetti({
-    particleCount: 7,
-    spread: 90,
-    startVelocity: 45,
-    origin: { x: Math.random(), y: 1 } // מלמטה
-  });
-
-  if (Date.now() < end) {
-    requestAnimationFrame(frame);
-  }
-})();
+        const isMobile = window.innerWidth < 768;
+        const duration = isMobile ? 2200 : 2600;
+        const end = Date.now() + duration;
+      
+        (function frame() {
+          confetti({
+            particleCount: isMobile ? 8 : 10,
+            spread: isMobile ? 120 : 90,
+            startVelocity: isMobile ? 30 : 45,
+            scalar: isMobile ? 0.9 : 1,
+            origin: {
+              x: Math.random(), // פיזור לרוחב
+              y: 1              // מלמטה
+            }
+          });
+      
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
+      
+      
 
 
 
