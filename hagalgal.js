@@ -559,14 +559,21 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             }
 
             radioButton = document.querySelector('input[name="drinkOption"][value="ספרייט"]');
-            if(currenOrderInventory.sprite === 0 ){
-                radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.4;
+            
+            if(radioButton === null){// בודק שהכפתור קיים
+                console.log("Null drinkOption detected!");
             }
             else{
-                radioButton.disabled = false;
-                radioButton.parentElement.style.opacity = 1;
+                    if(currenOrderInventory.sprite === 0 ){
+                        radioButton.disabled = true;
+                        radioButton.parentElement.style.opacity = 0.4;
+                    }
+                    else{
+                        radioButton.disabled = false;
+                        radioButton.parentElement.style.opacity = 1;
+                    }
             }
+   
 
             radioButton = document.querySelector('input[name="drinkOption"][value="פיוזטי"]');
             if(currenOrderInventory.fuzeTea === 0 ){
