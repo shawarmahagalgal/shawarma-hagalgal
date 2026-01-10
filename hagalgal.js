@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                     return false;
             }
 
-            if(name == "רן כהנא"||name == "עברי א"){
+            if(name == "רן כהנא"||name == "עברי א"){ // בדיקה של שמות עם חוב
                 alert ("לקוח בעל חוב- אין אפשרות להזמין")
                 return false;
             }
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             if(shippingCheckbox.checked){
                 address = document.getElementById('addressTextBox').value;
                 if(address.length == 0){
-                    alert("בחרת משלוח, נא למלא כתובת");
+                    alert("בחרת משלוח, שכחת למלא כתובת");
                     return false;
                 }
 
