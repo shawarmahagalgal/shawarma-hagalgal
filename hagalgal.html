@@ -5,7 +5,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
- #celebration-text {
+ /* #celebration-text {
   position: fixed;
   top: 20%;
   left: 50%;
@@ -13,8 +13,8 @@
   font-size: clamp(22px, 5vw, 48px);
   font-weight: bold;
   color: #c47704; /* כתום בהיר */
-  white-space: nowrap; /* מונע ירידת שורה */
-  text-shadow: 2px 2px 12px rgba(0,0,0,0.35);
+  /* white-space: nowrap; /* מונע ירידת שורה */
+  /* text-shadow: 2px 2px 12px rgba(0,0,0,0.35);
   opacity: 0;
   animation: fadeIn 1.5s ease forwards;
   animation-delay: 0.5s;
@@ -22,20 +22,20 @@
   max-width: 90vw;
   text-align: center;
      
-}
+} */ 
 
-.deal-pop {
+/* .deal-pop {
   color: #1a3dda;
   font-weight: bold;
   animation: popIn 2s ease-out;
-}
+} */
 
-.deal-pop span {
+/* .deal-pop span {
   color: #e53935;
   margin-right: 4px;
-}
+} */
 
-@keyframes popIn {
+/* @keyframes popIn {
   0% {
     transform: scale(0.9);
     opacity: 0;
@@ -55,7 +55,7 @@
     to {
       opacity: 1;
     }
-  }
+  } */
 </style>
 
     <meta charset="UTF-8">
@@ -94,11 +94,11 @@
             margin-top: 10px;
         }
         .send-button:hover {
-            background-color: #1a489e;
+            background-color: #17469d;
         }
 
         button {
-            background-color: #28a745;
+            background-color: #249e40;
             color: white;
             padding: 10px 15px;
             border: none;
@@ -452,13 +452,13 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
-            <h5 class="deal-pop">
+            <!-- <h5 class="deal-pop">
                 🔥 חדש! קונים ארוחה (שווארמה, 5 כדורי פלאפל/ציפס ושתייה) ומקבלים 5₪ הנחה
-              </h5>
+              </h5> -->
               
 
             <label class="checkbox-btn2">
-                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה ספיישל עגל </span>
+                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה פרגית</span>
             </label>
 
             <div id="wrappingOptions" class="radio-group" style="display: none;">
@@ -468,9 +468,9 @@
                 <label class="multi-color-radio-btn">
                     <input type="radio" name="wrappingOption" value="בלאפה" data-price="49"> <span>בלאפה (49₪)</span>
                 </label>
-                <!-- <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="חמגשית" data-price="45"> <span>חדש! מבצע: פיתה+ 5 כדורי פלאפל גדולים + פחית (45₪) </span>
-                </label> -->
+                <label class="multi-color-radio-btn">
+                    <input type="radio" name="wrappingOption" value="חמגשית" data-price="45"> <span> (45₪) בחמגשית</span>
+                </label>
             </div>
 
 
@@ -519,7 +519,7 @@
                     <input type="radio" name="sideOption" value="ציפס" data-price="10"> <span>צ'יפס (10₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="sideOption" value="פוטטוס" data-price="6"> <span>חדש! 5 כדורי פלאפל גדולים (6₪)</span>
+                    <input type="radio" name="sideOption" value="פוטטוס" data-price="12"> <span>פוטטוס (12₪)</span>
                 </label>
             </div>
 
@@ -539,7 +539,7 @@
                     <input type="radio" name="drinkOption" value="ספרייט" data-price="3"> <span>כוס ענבים 330מ"ל (לא זמין במשלוח) (3₪)</span>
                 </label>  -->
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="drinkOption" value="פיוזטי" data-price="8"> <span>לימוננע 0.5 ליטר (8₪)</span>
+                    <input type="radio" name="drinkOption" value="פיוזטי" data-price="8"> <span>לימונענע 0.5 ליטר (8₪)</span>
                 </label>
                 <!--<label class="multi-color-radio-btn">
                     <input type="radio" name="drinkOption" value="כוס ענבים" data-price="3"> <span>כוס ענבים 330 מ"ל (לא זמין במשלוח) (3₪)</span>
@@ -589,15 +589,15 @@
     
     <div class="background-container" id="closed-page" style="display: none;">
         <h2>הדוכן סגור</h2>
-        <h3>שעות פתיחה: ימי ראשון, 17:00-21:30</h3>
+        <h3>שעות פתיחה: ימי ראשון, 17:00-21:00</h3>
         <h3>(או עד סוף הגלגל)</h3>
     </div>
 
     <script type="module" src="hagalgal.js"></script>
 
-    <div id="celebration-text">🎉 הגלגל חוגג שנה 🎉</div>
+    <!-- <div id="celebration-text">🎉 הגלגל חוגג שנה 🎉</div> -->
 
-    <script>
+    <!-- <script>
         const isMobile = window.innerWidth < 768;
         const duration = isMobile ? 2200 : 2600;
         const end = Date.now() + duration;
@@ -618,14 +618,18 @@
             requestAnimationFrame(frame);
           }
         })();
+       -->
       
-      
 
 
 
-  setTimeout(() => {
+  <!-- setTimeout(() => {
     document.getElementById("celebration-text").style.display = "none";
-  }, 5000);
+  }, 5000); -->
+
+</script>
+
+
 </script>
 
 
