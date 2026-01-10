@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             var sides = Array.from(document.querySelectorAll('input[name="sideOption"]:checked')).map(option => option.value);
 
 
-            const discount = 5;
+            const discount = 0;
         
             if (isShawarmaChecked && (issidesChecked && sides.length) && (isDrinkChecked && drinks.length)) {
                 price -= discount;
@@ -285,6 +285,12 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                     alert("יש למלא שם ומספר טלפון");
                     return false;
             }
+
+            if(name == "רן כהנא"||name == "עברי א"){
+                alert ("לקוח בעל חוב- אין אפשרות להזמין")
+                return false;
+            }
+
 
             const isValidName = /^[\u0590-\u05FF]+(?:\s+[\u0590-\u05FF]+)+\s*$/.test(name);
 
@@ -433,7 +439,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                     paymentComment += "תשלום לשליח)"
                 }
                 else{
-                    paymentComment += "הצגת אישור תשלום לשליח)"
+                    paymentComment += "הצגת אישור תשלום לשליח (למספר 0555531775))"
                 }
             }
             else{
@@ -441,7 +447,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                     paymentComment += "תשלום בדוכן)"
                 }
                 else{
-                    paymentComment += "הצגת אישור תשלום בדוכן)"
+                    paymentComment += "הצגת אישור תשלום בדוכן (למספר 0555531775)"
                 }
             }
             
@@ -697,3 +703,5 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             // Reload the page to start a new order
             location.reload();
         });
+
+        
