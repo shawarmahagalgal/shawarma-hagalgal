@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             var sides = Array.from(document.querySelectorAll('input[name="sideOption"]:checked')).map(option => option.value);
 
 
-            const discount = 0;
+            const discount = 5;
         
             if (isShawarmaChecked && (issidesChecked && sides.length) && (isDrinkChecked && drinks.length)) {
                 price -= discount;
@@ -286,10 +286,10 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                     return false;
             }
 
-            if(name == "רן כהנא"||name == "עברי א"){ // בדיקה של שמות עם חוב
-                alert ("לקוח בעל חוב- אין אפשרות להזמין")
-                return false;
-            }
+            // if(name == "רן כהנא"||name == "עברי א"){ // בדיקה של שמות עם חוב
+            //     alert ("לקוח בעל חוב- אין אפשרות להזמין")
+            //     return false;
+            // }
 
 
             const isValidName = /^[\u0590-\u05FF]+(?:\s+[\u0590-\u05FF]+)+\s*$/.test(name);

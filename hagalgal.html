@@ -5,37 +5,51 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
- /* #celebration-text {
+#celebration-text {
   position: fixed;
   top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(22px, 5vw, 48px);
-  font-weight: bold;
-  color: #c47704; /* כתום בהיר */
-  /* white-space: nowrap; /* מונע ירידת שורה */
-  /* text-shadow: 2px 2px 12px rgba(0,0,0,0.35);
+  transform: translate(-50%, -50%) scale(0.6);
+  font-size: clamp(24px, 5vw, 48px);
+  font-weight: 900;
+  color: #ffb703;
+  text-shadow: 0 0 0 rgba(255,183,3,0);
   opacity: 0;
-  animation: fadeIn 1.5s ease forwards;
-  animation-delay: 0.5s;
+  animation: popGlow 1.6s ease forwards;
   z-index: 9999;
-  max-width: 90vw;
   text-align: center;
-     
-} */ 
+}
 
-/* .deal-pop {
+@keyframes popGlow {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+    text-shadow: 0 0 0 rgba(255,183,3,0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+    text-shadow: 0 0 25px rgba(255,183,3,0.8);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    text-shadow: 0 0 15px rgba(255,183,3,0.6);
+  }
+}
+
+
+.deal-pop {
   color: #1a3dda;
   font-weight: bold;
   animation: popIn 2s ease-out;
-} */
+}
 
-/* .deal-pop span {
+.deal-pop span {
   color: #e53935;
   margin-right: 4px;
-} */
+}
 
-/* @keyframes popIn {
+@keyframes popIn {
   0% {
     transform: scale(0.9);
     opacity: 0;
@@ -55,7 +69,7 @@
     to {
       opacity: 1;
     }
-  } */
+  }
 </style>
 
     <meta charset="UTF-8">
@@ -452,24 +466,24 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
-            <!-- <h5 class="deal-pop">
-                🔥 חדש! קונים ארוחה (שווארמה, 5 כדורי פלאפל/ציפס ושתייה) ומקבלים 5₪ הנחה
-              </h5> -->
+            <h5 class="deal-pop">
+                🔥 חדש! קונים ארוחה (שווארמה + פוטטו/ציפס ) ומקבלים שתייה חינם!!!
+              </h5>
               
 
             <label class="checkbox-btn2">
-                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה פרגית</span>
+                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה ספיישל אנטריקוט</span>
             </label>
 
             <div id="wrappingOptions" class="radio-group" style="display: none;">
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="39"> <span>בפיתה (39₪)</span>
+                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="46"> <span>בפיתה (46₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="49"> <span>בלאפה (49₪)</span>
+                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="56"> <span>בלאפה (56₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="חמגשית" data-price="45"> <span> (45₪) בחמגשית</span>
+                    <input type="radio" name="wrappingOption" value="חמגשית" data-price="50"> <span> (50₪) בחמגשית</span>
                 </label>
             </div>
 
@@ -617,8 +631,8 @@
           if (Date.now() < end) {
             requestAnimationFrame(frame);
           }
-        })();
-       -->
+        })(); -->
+      
       
 
 
