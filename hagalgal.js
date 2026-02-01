@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             var sides = Array.from(document.querySelectorAll('input[name="sideOption"]:checked')).map(option => option.value);
 
 
-            const discount = 0;
+            const discount = 5;
         
             if (isShawarmaChecked && (issidesChecked && sides.length) && (isDrinkChecked && drinks.length)) {
                 price -= discount;
@@ -438,9 +438,9 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
                 if(paymentMethod == "מזומן"){
                     paymentComment += "תשלום לשליח)"
                 }
-                else{
-                    paymentComment += "הצגת אישור תשלום לשליח (למספר 0555531775))"
-                }
+else{
+    paymentComment += "הצגת אישור תשלום לשליח (למספר 0555531775))"
+}
             }
             else{
                 if(paymentMethod == "מזומן"){
@@ -691,6 +691,7 @@ document.addEventListener('DOMContentLoaded', loadOrdersPage);
             
             applyInventoryToView();
         }  
+
 
         async function initInventoryWrapper(){
                 await initInventory();

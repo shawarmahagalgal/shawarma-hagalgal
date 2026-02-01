@@ -5,37 +5,215 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
- /* #celebration-text {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(22px, 5vw, 48px);
-  font-weight: bold;
-  color: #c47704; /* כתום בהיר */
-  /* white-space: nowrap; /* מונע ירידת שורה */
-  /* text-shadow: 2px 2px 12px rgba(0,0,0,0.35);
-  opacity: 0;
-  animation: fadeIn 1.5s ease forwards;
-  animation-delay: 0.5s;
-  z-index: 9999;
-  max-width: 90vw;
-  text-align: center;
-     
-} */ 
 
-/* .deal-pop {
+
+  /* === OVERLAY אנטריקוט === */
+  #entrecote-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, #1a0505, #0b0b0b);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateY(-100%);
+    animation: slideInFromTop 1s ease-out forwards;
+  }
+
+  #entrecote-overlay.exit {
+    animation: slideOutToBottom 0.9s ease-in forwards;
+  }
+
+  .overlay-content {
+    text-align: center;
+    color: white;
+    padding: 24px;
+    max-width: 420px;
+  }
+
+.overlay-logo {
+  display: block;
+  margin: 0 auto 18px auto; /* ממורכז + רווח למטה */
+
+  width: 110px;
+  height: 110px;
+
+  background: white;
+  padding: 0px;
+  border-radius: 50%;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+
+  .badge {
+    display: inline-block;
+    background: #ffb703;
+    color: #000;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+
+  #entrecote-overlay h1 {
+    font-size: clamp(30px, 8vw, 46px);
+    color: #ffb703;
+    margin-bottom: 8px;
+  }
+
+  #entrecote-overlay h2 {
+    font-size: clamp(18px, 5vw, 26px);
+    margin-bottom: 16px;
+  }
+
+  #entrecote-overlay p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  #enter-site {
+    background: linear-gradient(135deg, #ffb703, #ff8c00);
+    color: #000;
+    border: none;
+    border-radius: 40px;
+    padding: 14px 36px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  @keyframes slideInFromTop {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes slideOutToBottom {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(100%); opacity: 0; }
+  }
+
+
+
+  .phone-widget {
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  background: #25d366;
+  color: white;
+  border-radius: 50px;
+  padding: 12px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;  
+
+  z-index: 9998;
+}
+
+.phone-icon {
+  font-size: 22px;
+}
+
+.phone-text {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.3s ease;
+}
+
+.phone-widget.open .phone-text {
+  max-width: 220px;
+}
+
+.phone-widget a {
+  color: white;
+  text-decoration: underline;
+}
+
+
+
+
+#promoOverlay.hidden {
+    display: none;
+}
+
+#promoOverlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: rgba(0,0,0,0.2);
+    z-index: 9997;
+    pointer-events:none; /* ברגע שלא פעיל – לא חוסם כלום */
+}
+
+#promoOverlay.active {
+    pointer-events: all; /* כשהוא פעיל – כן מאפשר אינטראקציה */
+}
+
+.promoBox {
+    background: #fff8e7;
+    border-radius: 15px;
+    padding: 25px 35px;
+    max-width: 320px;
+    text-align:center;
+    box-shadow:0 12px 25px rgba(0,0,0,0.2);
+    transform: translateY(-50px);
+    opacity:0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+#promoOverlay.active .promoBox {
+    transform: translateY(0);
+    opacity:1;
+}
+
+.promoSmall {
+    font-size: 12px;
+    color: #555;
+    margin-top: 8px;
+}
+
+#understoodBtn {
+    margin-top: 18px;
+    padding: 10px 20px;
+    background: #ffd39f;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    transition: background 0.3s ease;
+}
+#understoodBtn:hover { background:#ffc070; }
+
+
+
+  
+
+
+
+
+.deal-pop {
   color: #1a3dda;
   font-weight: bold;
   animation: popIn 2s ease-out;
-} */
+}
 
-/* .deal-pop span {
+.deal-pop span {
   color: #e53935;
   margin-right: 4px;
-} */
+}
 
-/* @keyframes popIn {
+@keyframes popIn {
   0% {
     transform: scale(0.9);
     opacity: 0;
@@ -55,7 +233,7 @@
     to {
       opacity: 1;
     }
-  } */
+  }
 </style>
 
     <meta charset="UTF-8">
@@ -452,31 +630,34 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
-            <!-- <h5 class="deal-pop">
-                🔥 חדש! קונים ארוחה (שווארמה, 5 כדורי פלאפל/ציפס ושתייה) ומקבלים 5₪ הנחה
-              </h5> -->
+            <h5 class="deal-pop">
+                🔥 מבצע! קונים ארוחה (שווארמה, פוטטו/ציפס) ומקבלים שתייה חינם!!! 
+              </h5>
               
 
             <label class="checkbox-btn2">
-                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה פרגית </span>
+                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה ספיישל אנטריקוט!!! </span>
             </label>
 
             <div id="wrappingOptions" class="radio-group" style="display: none;">
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="39"> <span>בפיתה (39₪)</span>
+                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="46"> <span>בפיתה (46₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="49"> <span>בלאפה (49₪)</span>
+                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="56"> <span>בלאפה (56₪)</span>
                 </label>
-                <label class="multi-color-radio-btn">
+                <!-- <label class="multi-color-radio-btn">
                     <input type="radio" name="wrappingOption" value="חמגשית" data-price="45"> <span> (45₪) בחמגשית</span>
-                </label>
+                </label> -->
             </div>
 
 
             <div id="orderOptions" class="checkbox-group" style="display: none;">
                 <label class="checkbox-btn">
                     <input type="checkbox" name="options" value="חומוס"> <span>חומוס</span>
+                </label>
+                  <label class="checkbox-btn">
+                    <input type="checkbox" name="options" value="לימון כבוש"> <span>לימון כבוש</span>
                 </label>
                 <label class="checkbox-btn">
                     <input type="checkbox" name="options" value="חריף"> <span>חריף</span>
@@ -593,41 +774,99 @@
         <h3>(או עד סוף הגלגל)</h3>
     </div>
 
-    <script type="module" src="hagalgal.js"></script>
+       <div id="entrecote-overlay">
+  <div class="overlay-content">
 
-    <!-- <div id="celebration-text">🎉 הגלגל חוגג שנה 🎉</div> -->
+    <img src="logo.jpg" alt="לוגו העסק" class="overlay-logo">
 
-    <!-- <script>
-        const isMobile = window.innerWidth < 768;
-        const duration = isMobile ? 2200 : 2600;
-        const end = Date.now() + duration;
+    <div class="badge">ספיישל יום ראשון</div>
+
+    <h1>🔥 גלגל אנטריקוט 🔥</h1>
+    <h2>חם ועסיסי · נחתך במקום</h2>
+    
+
+       <p>
+           אנטריקוט אמיתי<br>
+            כמות מוגבלת – אל תפספסו!
+         </p>
+
+         <button id="enter-site">יאללה לאנטריקוט 🥩</button>
+      </div>
+      </div>
+
+
+
+      <div class="phone-widget" onclick="togglePhone()">
+  <span class="phone-icon">📞</span>
+  <span class="phone-text">
+    לשאלות: <a href="tel:0555531775">055-55-31775</a>
+  </span>
+</div>
+
+<div id="promoOverlay" class="hidden">
+    <div class="promoBox">
+        <h3>אל תפספסו! 🎉</h3>
+        <p>קונים ארוחה (שווארמה + צ'יפס או פוטטו) <br>ומקבלים שתייה בחינם!</p>
+        <p class="promoSmall">*צריך להזמין גם את השתייה באתר, המחיר יתעדכן אוטומטית.*</p>
+        <button id="understoodBtn">הבנתי!</button>
+    </div>
+</div>
+
+
+
+
+    <script type="module" src="hagalgal.js"></script> 
+    <script>
+  document.getElementById('enter-site').addEventListener('click', function () {
+    const overlay = document.getElementById('entrecote-overlay');
+    overlay.classList.add('exit');
+
+    setTimeout(() => {
+      overlay.remove();
+    }, 900);
+  });
+</script>
+
+
+<script>
+function togglePhone() {
+  document.querySelector('.phone-widget').classList.toggle('open');
+}
+</script>
+
+
+
       
-        (function frame() {
-          confetti({
-            particleCount: isMobile ? 8 : 10,
-            spread: isMobile ? 120 : 90,
-            startVelocity: isMobile ? 30 : 45,
-            scalar: isMobile ? 0.9 : 1,
-            origin: {
-              x: Math.random(), // פיזור לרוחב
-              y: 1              // מלמטה
-            }
-          });
-      
-          if (Date.now() < end) {
-            requestAnimationFrame(frame);
-          }
-        })();
-       -->
-      
+
+<script>
+window.addEventListener('load', () => {
+    const overlay = document.getElementById('promoOverlay');
+    overlay.classList.remove('hidden');
+    setTimeout(() => {
+        overlay.classList.add('active');
+    }, 100);
+});
+
+
+// כפתור סוגר את הפופ-אפ – listener רגיל
+const understoodBtn = document.getElementById('understoodBtn');
+if (understoodBtn) {
+    understoodBtn.addEventListener('click', () => {
+        const overlay = document.getElementById('promoOverlay');
+        overlay.classList.remove('active'); // מתחיל אנימציה של סגירה
+        setTimeout(() => {
+            overlay.classList.add('hidden'); // מסתיר לחלוטין אחרי האנימציה
+        }, 600); // מחכה שהאנימציה תסתיים
+        localStorage.setItem('promoShown', 'true'); // מסמן שהמשתמש ראה את הפופ-אפ
+    });
+}
+</script>
 
 
 
-  <!-- setTimeout(() => {
-    document.getElementById("celebration-text").style.display = "none";
-  }, 5000); -->
 
 </script>
+
 
 
 </script>
