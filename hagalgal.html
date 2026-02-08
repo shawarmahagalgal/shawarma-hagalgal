@@ -8,7 +8,7 @@
 
 
   /* === OVERLAY אנטריקוט === */
-  #entrecote-overlay {
+  /* #entrecote-overlay {
     position: fixed;
     inset: 0;
     background: linear-gradient(180deg, #1a0505, #0b0b0b);
@@ -34,9 +34,7 @@
 
 .overlay-logo {
   display: block;
-  margin: 0 auto 18px auto; /* ממורכז + רווח למטה */
-
-  width: 110px;
+  margin: 0 auto 18px auto; 
   height: 110px;
 
   background: white;
@@ -45,9 +43,9 @@
 
   box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
+/*  */
 
-
-  .badge {
+  /* .badge {
     display: inline-block;
     background: #ffb703;
     color: #000;
@@ -93,7 +91,7 @@
   @keyframes slideOutToBottom {
     from { transform: translateY(0); opacity: 1; }
     to { transform: translateY(100%); opacity: 0; }
-  }
+  }  */
 
 
 
@@ -138,7 +136,7 @@
 
 
 
-#promoOverlay.hidden {
+/* #promoOverlay.hidden {
     display: none;
 }
 
@@ -153,11 +151,11 @@
     align-items:center;
     background: rgba(0,0,0,0.2);
     z-index: 9997;
-    pointer-events:none; /* ברגע שלא פעיל – לא חוסם כלום */
+    pointer-events:none; 
 }
 
 #promoOverlay.active {
-    pointer-events: all; /* כשהוא פעיל – כן מאפשר אינטראקציה */
+    pointer-events: all; 
 }
 
 .promoBox {
@@ -193,7 +191,7 @@
     cursor:pointer;
     transition: background 0.3s ease;
 }
-#understoodBtn:hover { background:#ffc070; }
+#understoodBtn:hover { background:#ffc070; } */
 
 
 
@@ -630,25 +628,25 @@
 
 
             <p><strong>מה תרצו להזמין?</strong></p>
-            <h5 class="deal-pop">
+            <!-- <h5 class="deal-pop">
                 🔥 מבצע! קונים ארוחה (שווארמה, פוטטו/ציפס) ומקבלים שתייה חינם!!! 
-              </h5>
+              </h5> -->
               
 
             <label class="checkbox-btn2">
-                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה ספיישל אנטריקוט!!! </span>
+                <input type="checkbox" id="ShawarmaCheckBox" name="Shawarma"><span> שווארמה ספיישל עגל </span>
             </label>
 
             <div id="wrappingOptions" class="radio-group" style="display: none;">
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="46"> <span>בפיתה (46₪)</span>
+                    <input type="radio" name="wrappingOption" value="בפיתה" data-price="39"> <span>בפיתה (39₪)</span>
                 </label>
                 <label class="multi-color-radio-btn">
-                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="56"> <span>בלאפה (56₪)</span>
+                    <input type="radio" name="wrappingOption" value="בלאפה" data-price="49"> <span>בלאפה (49₪)</span>
                 </label>
-                <!-- <label class="multi-color-radio-btn">
+                <label class="multi-color-radio-btn">
                     <input type="radio" name="wrappingOption" value="חמגשית" data-price="45"> <span> (45₪) בחמגשית</span>
-                </label> -->
+                </label>
             </div>
 
 
@@ -774,7 +772,7 @@
         <h3>(או עד סוף הגלגל)</h3>
     </div>
 
-       <div id="entrecote-overlay">
+       <!-- <div id="entrecote-overlay">
   <div class="overlay-content">
 
     <img src="logo.jpg" alt="לוגו העסק" class="overlay-logo">
@@ -792,7 +790,7 @@
 
          <button id="enter-site">יאללה לאנטריקוט 🥩</button>
       </div>
-      </div>
+      </div> -->
 
 
 
@@ -803,14 +801,14 @@
   </span>
 </div>
 
-<div id="promoOverlay" class="hidden">
+<!-- <div id="promoOverlay" class="hidden">
     <div class="promoBox">
         <h3>אל תפספסו! 🎉</h3>
         <p>קונים ארוחה (שווארמה + צ'יפס או פוטטו) <br>ומקבלים שתייה בחינם!</p>
         <p class="promoSmall">*צריך להזמין גם את השתייה באתר, המחיר יתעדכן אוטומטית.*</p>
         <button id="understoodBtn">הבנתי!</button>
     </div>
-</div>
+</div> -->
 
 
 
@@ -838,17 +836,17 @@ function togglePhone() {
 
       
 
-<script>
+<!-- <script>
 window.addEventListener('load', () => {
     const overlay = document.getElementById('promoOverlay');
     overlay.classList.remove('hidden');
     setTimeout(() => {
         overlay.classList.add('active');
     }, 100);
-});
+}); -->
 
 
-// כפתור סוגר את הפופ-אפ – listener רגיל
+<!-- // כפתור סוגר את הפופ-אפ – listener רגיל
 const understoodBtn = document.getElementById('understoodBtn');
 if (understoodBtn) {
     understoodBtn.addEventListener('click', () => {
@@ -859,7 +857,7 @@ if (understoodBtn) {
         }, 600); // מחכה שהאנימציה תסתיים
         localStorage.setItem('promoShown', 'true'); // מסמן שהמשתמש ראה את הפופ-אפ
     });
-}
+} -->
 </script>
 
 
