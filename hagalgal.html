@@ -93,6 +93,128 @@
     to { transform: translateY(100%); opacity: 0; }
   }  */
 
+    /* ===== Entrecote Intro Screen ===== */
+
+#entrecote-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background: linear-gradient(180deg, #1a0505, #0b0b0b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: slideInFromTop 1s ease-out;
+}
+
+#entrecote-overlay .overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    width: 100%;
+    color: white;
+}
+
+#entrecote-overlay .overlay-logo {
+    width: 150px;
+    height: auto;
+    max-width: 45%;
+    margin-bottom: 20px;
+    border-radius: 50%;
+}
+
+#entrecote-overlay .badge {
+    background: #b8860b;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+#entrecote-overlay h1 {
+    font-size: clamp(32px, 8vw, 52px);
+    color: #e6b65c;
+    margin: 10px 0;
+    font-weight: 900;
+}
+
+#entrecote-overlay .subtitle {
+    font-size: 22px;
+    color: white;
+    margin: 10px 0 20px;
+}
+
+#entrecote-overlay .description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+#entrecote-overlay #enter-site {
+    background: linear-gradient(135deg, #c99736, #8b5e16);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 16px 35px;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 20px rgba(201, 151, 54, 0.3);
+}
+
+#entrecote-overlay #enter-site:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 25px rgba(201, 151, 54, 0.5);
+}
+
+#entrecote-overlay.exit {
+    animation: slideOutToBottom 0.9s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutToBottom {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@media (max-width: 480px) {
+    #entrecote-overlay .overlay-logo {
+        width: 120px;
+    }
+
+    #entrecote-overlay .subtitle {
+        font-size: 19px;
+    }
+
+    #entrecote-overlay .description {
+        font-size: 16px;
+    }
+}
+
 
 
   .phone-widget {
@@ -594,6 +716,42 @@
     </style>
 </head>
 <body>
+
+<!-- Entrecote Intro Screen -->
+<div id="entrecote-overlay">
+
+    <div class="overlay-content">
+
+        <img src="logo.jpg"
+             alt="גלגל האנטריקוט"
+             class="overlay-logo">
+
+        <div class="badge">
+            ספיישל יום ראשון
+        </div>
+
+        <h1>🔥 גלגל אנטריקוט 🔥</h1>
+
+        <div class="subtitle">
+            חם ועסיסי · נחתך במקום
+        </div>
+
+        <div class="description">
+            אנטריקוט אמיתי<br>
+            כמות מוגבלת – אל תפספסו!
+        </div>
+
+        <button id="enter-site">
+            יאללה לאנטריקוט 🥩
+        </button>
+
+    </div>
+
+</div>
+
+
+
+    
     <div id="order-page" class="container" style="display: none;">
         <img src="logo.jpg" alt="Logo" id="logo"/>
 
@@ -836,6 +994,27 @@ function togglePhone() {
 }
 </script>
 
+
+    <script>
+(function () {
+
+    const overlay = document.getElementById('entrecote-overlay');
+    const enterButton = document.getElementById('enter-site');
+
+    if (!overlay || !enterButton) return;
+
+    enterButton.addEventListener('click', function () {
+
+        overlay.classList.add('exit');
+
+        setTimeout(function () {
+            overlay.remove();
+        }, 900);
+
+    });
+
+})();
+</script>
 
 
       
