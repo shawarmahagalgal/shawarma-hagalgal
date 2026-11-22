@@ -581,15 +581,18 @@ else{
             }
    
 
-            radioButton = document.querySelector('input[name="drinkOption"][value="פיוזטי"]');
-            if(currenOrderInventory.fuzeTea === 0 ){
-                radioButton.disabled = true;
-                radioButton.parentElement.style.opacity = 0.4;
-            }
-            else{
-                radioButton.disabled = false;
-                radioButton.parentElement.style.opacity = 1;
-            }
+radioButton = document.querySelector('input[name="drinkOption"][value="פיוזטי"]');
+
+if (radioButton !== null) {
+    if (currenOrderInventory.fuzeTea === 0) {
+        radioButton.disabled = true;
+        radioButton.parentElement.style.opacity = 0.4;
+    }
+    else {
+        radioButton.disabled = false;
+        radioButton.parentElement.style.opacity = 1;
+    }
+}
 
             //radioButton = document.querySelector('input[name="drinkOption"][value="תות בננה"]');
             //if(currenOrderInventory.schweppes === 0 ){
